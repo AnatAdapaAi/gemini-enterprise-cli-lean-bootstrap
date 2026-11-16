@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-02-code,team-00-pct"
-description: "Manages feature flags, staged rollout thresholds, and client configuration templates with deterministic rollback rules."
+description: >-
+  Manages feature flags, staged rollout thresholds, and client configuration templates with
+  deterministic rollback rules.
 ---
 
 # LeanStartupOps-firebase-remote-config-basics

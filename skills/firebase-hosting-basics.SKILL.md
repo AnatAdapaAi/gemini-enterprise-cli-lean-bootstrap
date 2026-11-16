@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-02-code,team-15-ux"
-description: "Deploys and configures static Firebase Hosting for single-page apps (SPAs) and static documentation portals at zero idle compute cost."
+description: >-
+  Deploys and configures static Firebase Hosting for single-page apps (SPAs) and static
+  documentation portals at zero idle compute cost.
 ---
 
 # LeanStartupOps-firebase-hosting-basics

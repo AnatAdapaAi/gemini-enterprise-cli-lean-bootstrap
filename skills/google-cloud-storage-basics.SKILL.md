@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-00-pct,team-02-code,team-19-cos"
-description: "Core object storage operations in GCS including atomic conditional writes (`ifGenerationMatch`) for distributed agent locking."
+description: >-
+  Core object storage operations in GCS including atomic conditional writes (`ifGenerationMatch`)
+  for distributed agent locking.
 ---
 
 # LeanStartupOps-google-cloud-storage-basics

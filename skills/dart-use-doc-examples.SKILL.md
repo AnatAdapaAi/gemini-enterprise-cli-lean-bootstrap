@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-00-pct,team-02-code,team-13-enablement"
-description: "Inject external verified code examples into Dartdoc using the {@example} directive and filter regions with #hide, #region, and #endregion tags."
+description: >-
+  Inject external verified code examples into Dartdoc using the {@example} directive and filter
+  regions with #hide, #region, and #endregion tags.
 ---
 
 # LeanStartupOps-dart-use-doc-examples

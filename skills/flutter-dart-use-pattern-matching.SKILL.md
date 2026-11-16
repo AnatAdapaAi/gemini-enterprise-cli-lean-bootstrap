@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-00-pct,team-02-code"
-description: "Applies Dart 3 exhaustive pattern matching, sealed classes, and destructuring to validate schemas and state machines."
+description: >-
+  Applies Dart 3 exhaustive pattern matching, sealed classes, and destructuring to validate
+  schemas and state machines.
 ---
 
 # LeanStartupOps-flutter-dart-use-pattern-matching

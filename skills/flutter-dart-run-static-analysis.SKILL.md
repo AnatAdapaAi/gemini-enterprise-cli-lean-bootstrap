@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-00-pct,team-02-code"
-description: "Executes `dart analyze --fatal-infos --fatal-warnings` to enforce strict static type safety before any PR is reviewed."
+description: >-
+  Executes `dart analyze --fatal-infos --fatal-warnings` to enforce strict static type safety
+  before any PR is reviewed.
 ---
 
 # LeanStartupOps-flutter-dart-run-static-analysis

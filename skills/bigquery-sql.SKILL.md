@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-17-analytics,team-09-eval"
-description: "Optimizes analytical SQL queries executed by DuckDB inside Cloud Run Jobs over partitioned Parquet/JSONL files in GCS."
+description: >-
+  Optimizes analytical SQL queries executed by DuckDB inside Cloud Run Jobs over partitioned
+  Parquet/JSONL files in GCS.
 ---
 
 # LeanStartupOps-bigquery-sql

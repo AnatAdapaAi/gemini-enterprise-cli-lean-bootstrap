@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "scale_adapted_zero_idle"
 assigned_teams: "all-applicable-teams"
-description: "Event messaging; architecture forbids Pub/Sub-only state - every task must be persisted in `gs://LeanStartupOps-agent-tasks/`."
+description: >-
+  Event messaging; architecture forbids Pub/Sub-only state - every task must be persisted in
+  `gs://LeanStartupOps-agent-tasks/`.
 ---
 
 # LeanStartupOps-pubsub-event-streaming
@@ -16,7 +18,7 @@ Event messaging; architecture forbids Pub/Sub-only state - every task must be pe
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Event messaging; architecture forbids Pub/Sub-only state - every task
   must be persisted in `gs://LeanStartupOps-agent-tasks/`.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

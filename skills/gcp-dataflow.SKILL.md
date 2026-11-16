@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-17-analytics,team-08-finops"
-description: "Packages and executes batch data pipelines as container images built with Cloud Build (`python:3.12-slim`) running as Cloud Run Jobs over GCS, replacing Apache Beam on Dataflow."
+description: >-
+  Packages and executes batch data pipelines as container images built with Cloud Build
+  (`python:3.12-slim`) running as Cloud Run Jobs over GCS, replacing Apache Beam on Dataflow.
 ---
 
 # LeanStartupOps-gcp-dataflow

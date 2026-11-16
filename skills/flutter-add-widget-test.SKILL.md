@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-00-pct,team-02-code,team-15-ux"
-description: "Implements component-level `WidgetTester` suites verifying UI rendering, pause-screen interactions, and accessibility in CI."
+description: >-
+  Implements component-level `WidgetTester` suites verifying UI rendering, pause-screen
+  interactions, and accessibility in CI.
 ---
 
 # LeanStartupOps-flutter-add-widget-test

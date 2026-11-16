@@ -15,7 +15,7 @@ Implements deterministic immutable state management in Flutter for runtime pause
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Implements deterministic immutable state management in Flutter for
   runtime pause/resume overlays.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

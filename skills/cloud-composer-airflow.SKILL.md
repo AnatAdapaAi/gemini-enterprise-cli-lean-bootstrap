@@ -15,7 +15,7 @@ Scale-tier Airflow; HARD BLOCKED in bootstrap. Replaced by `LeanStartupOps-gcp-p
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Scale-tier Airflow; HARD BLOCKED in bootstrap. Replaced by
   `LeanStartupOps-gcp-pipeline-orchestration`.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

@@ -6,7 +6,8 @@ billing discoveries from 4 months of production testing (August - November).
 
 ---
 
-## 1. The 4-Month Billing Benchmark: From $2,158/mo Idle Burn to $296/mo (and $179 Net Credit Draw) at 19h/Day Production
+## 1. The 4-Month Billing Benchmark: From $2,158/mo Idle Burn to $296/mo (and $179 Net Credit Draw) at 19h/Day
+Production
 
 When connecting standard enterprise cloud templates out of the box, always-on services silently drain
 startup credits even when no code is running.
@@ -31,7 +32,8 @@ moved state to **Cloud Storage ($0.42)** & **Cloud Run ($0.11)**. |
 
 ## 2. Six Field-Tested FinOps Discoveries Every Startup Should Know
 
-### Discovery #1: Cheap Storage (GCS) + Regional Night-Window Batching Unlocks Up to ~40-50% Automatic Billing Reductions (Before Touching Credits!)
+### Discovery #1: Cheap Storage (GCS) + Regional Night-Window Batching Unlocks Up to ~40-50% Automatic Billing
+Reductions (Before Touching Credits!)
 - **What we saw in the data:** In August and September, running standard always-on compute yielded only a
   `-4.96%` spending discount, forcing **95% of the bill** to eat directly into startup promotional credits.
 - **The Breakthrough:** In mid October-November, by storing all intermediate state/snapshots in cheap

@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-11-security,team-08-finops,team-00-pct"
-description: "Mandatory Step 0 pre-flight authentication verification using Workload Identity and metadata server tokens (zero Service Account JSON keys)."
+description: >-
+  Mandatory Step 0 pre-flight authentication verification using Workload Identity and metadata
+  server tokens (zero Service Account JSON keys).
 ---
 
 # LeanStartupOps-google-cloud-auth-verification

@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-15-ux,team-02-code"
-description: "Adds interactive widget previews (`previews.dart`) to validate UI states, pause overlays, and RTL/LTR localization."
+description: >-
+  Adds interactive widget previews (`previews.dart`) to validate UI states, pause overlays, and
+  RTL/LTR localization.
 ---
 
 # LeanStartupOps-flutter-add-widget-preview

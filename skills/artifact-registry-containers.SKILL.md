@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "scale_adapted_zero_idle"
 assigned_teams: "all-applicable-teams"
-description: "Stores `python:3.12-slim` and Rust builder container images in `us-central1` with lifecycle cleanup policies."
+description: >-
+  Stores `python:3.12-slim` and Rust builder container images in `us-central1` with lifecycle
+  cleanup policies.
 ---
 
 # LeanStartupOps-artifact-registry-containers
@@ -15,7 +17,7 @@ Stores `python:3.12-slim` and Rust builder container images in `us-central1` wit
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Stores `python:3.12-slim` and Rust builder container images in
   `us-central1` with lifecycle cleanup policies.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

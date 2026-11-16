@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-02-code"
-description: "Resolves Dart/Flutter `pubspec.yaml` dependency version conflicts deterministically without upgrading to unverified pre-release packages."
+description: >-
+  Resolves Dart/Flutter `pubspec.yaml` dependency version conflicts deterministically without
+  upgrading to unverified pre-release packages.
 ---
 
 # LeanStartupOps-flutter-dart-resolve-package-conflicts

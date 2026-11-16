@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "scale_adapted_zero_idle"
 assigned_teams: "all-applicable-teams"
-description: "Generates and edits video/audio assets via Gemini multimodal APIs on a strict pay-per-invocation basis with zero idle endpoints."
+description: >-
+  Generates and edits video/audio assets via Gemini multimodal APIs on a strict
+  pay-per-invocation basis with zero idle endpoints.
 ---
 
 # LeanStartupOps-gemini-omni-flash-api
@@ -16,7 +18,7 @@ zero idle endpoints.
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Generates and edits video/audio assets via Gemini multimodal APIs on
   a strict pay-per-invocation basis with zero idle endpoints.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

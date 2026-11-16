@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-08-finops,team-02-code"
-description: "Troubleshoots Cloud Run Job batch executions by inspecting task status, exit codes, OOM events, and logs in `gs://LeanStartupOps-ci-logs`."
+description: >-
+  Troubleshoots Cloud Run Job batch executions by inspecting task status, exit codes, OOM events,
+  and logs in `gs://LeanStartupOps-ci-logs`.
 ---
 
 # LeanStartupOps-gcp-spark-troubleshooting

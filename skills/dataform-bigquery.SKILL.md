@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-17-analytics"
-description: "Executes versioned SQL transformation pipelines using DuckDB inside Cloud Run Jobs over GCS Parquet, replacing Dataform on BigQuery."
+description: >-
+  Executes versioned SQL transformation pipelines using DuckDB inside Cloud Run Jobs over GCS
+  Parquet, replacing Dataform on BigQuery.
 ---
 
 # LeanStartupOps-dataform-bigquery

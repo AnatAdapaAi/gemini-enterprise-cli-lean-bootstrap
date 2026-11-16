@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "scale_adapted_zero_idle"
 assigned_teams: "all-applicable-teams"
-description: "Retrieves API tokens and webhook secrets at runtime via Secret Manager IAM bindings without storing keys in files."
+description: >-
+  Retrieves API tokens and webhook secrets at runtime via Secret Manager IAM bindings without
+  storing keys in files.
 ---
 
 # LeanStartupOps-secret-manager-integration
@@ -15,7 +17,7 @@ Retrieves API tokens and webhook secrets at runtime via Secret Manager IAM bindi
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Retrieves API tokens and webhook secrets at runtime via Secret
   Manager IAM bindings without storing keys in files.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

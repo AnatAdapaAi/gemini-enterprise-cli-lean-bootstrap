@@ -15,7 +15,7 @@ Deploys scale-to-zero (`min-instances=0`) webhook receivers on Cloud Run in `us-
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Deploys scale-to-zero (`min-instances=0`) webhook receivers on Cloud
   Run in `us-central1`.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

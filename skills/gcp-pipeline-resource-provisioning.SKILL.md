@@ -4,14 +4,16 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-08-finops,team-11-security"
-description: "Declarative provisioning of GCS buckets, Cloud Run Jobs, Cloud Build triggers, and Secret Manager references in `our-gcp-project-id`."
+description: >-
+  Declarative provisioning of GCS buckets, Cloud Run Jobs, Cloud Build triggers, and Secret
+  Manager references in `our-gcp-project-id`.
 ---
 
 # LeanStartupOps-gcp-pipeline-resource-provisioning
 
 ## 1. Purpose & Technical Scope
 Declarative provisioning of GCS buckets, Cloud Run Jobs, Cloud Build triggers, and Secret Manager references
-in `your-gcp-project-id`.
+in `our-gcp-project-id`.
 
 ## 2. Execution & Implementation Rules
 - Queue every new Service Account or IAM binding one item at a time for explicit `ANAT` human approval.

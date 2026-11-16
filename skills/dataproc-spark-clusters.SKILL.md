@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "scale_adapted_zero_idle"
 assigned_teams: "all-applicable-teams"
-description: "Scale-tier Dataproc; HARD BLOCKED in bootstrap. Replaced by `LeanStartupOps-gcp-spark` (Cloud Run + DuckDB)."
+description: >-
+  Scale-tier Dataproc; HARD BLOCKED in bootstrap. Replaced by `LeanStartupOps-gcp-spark` (Cloud
+  Run + DuckDB).
 ---
 
 # LeanStartupOps-dataproc-spark-clusters
@@ -15,7 +17,7 @@ Scale-tier Dataproc; HARD BLOCKED in bootstrap. Replaced by `LeanStartupOps-gcp-
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Scale-tier Dataproc; HARD BLOCKED in bootstrap. Replaced by
   `LeanStartupOps-gcp-spark` (Cloud Run + DuckDB).
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

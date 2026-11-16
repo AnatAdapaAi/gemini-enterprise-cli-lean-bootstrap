@@ -15,7 +15,7 @@ Pay-per-byte PII redaction and pattern inspection for untrusted forum/airlock pa
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Pay-per-byte PII redaction and pattern inspection for untrusted
   forum/airlock payloads.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

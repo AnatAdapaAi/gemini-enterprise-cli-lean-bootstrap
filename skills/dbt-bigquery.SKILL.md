@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-17-analytics"
-description: "Executes layered SQL models (`dbt-duckdb` or plain SQL) in Cloud Run Jobs over GCS Parquet, replacing dbt on BigQuery."
+description: >-
+  Executes layered SQL models (`dbt-duckdb` or plain SQL) in Cloud Run Jobs over GCS Parquet,
+  replacing dbt on BigQuery.
 ---
 
 # LeanStartupOps-dbt-bigquery

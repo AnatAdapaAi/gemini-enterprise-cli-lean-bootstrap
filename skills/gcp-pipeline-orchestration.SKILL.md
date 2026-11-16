@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-19-cos,team-08-finops"
-description: "Orchestrates multi-step data and agent workflows using GCS task files and Cloud Run triggers, replacing Cloud Composer/Airflow."
+description: >-
+  Orchestrates multi-step data and agent workflows using GCS task files and Cloud Run triggers,
+  replacing Cloud Composer/Airflow.
 ---
 
 # LeanStartupOps-gcp-pipeline-orchestration

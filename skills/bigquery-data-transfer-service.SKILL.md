@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-10-research"
-description: "Manages scheduled Cloud Run ingestion jobs pulling external public deltas into GCS, replacing BigQuery Data Transfer Service."
+description: >-
+  Manages scheduled Cloud Run ingestion jobs pulling external public deltas into GCS, replacing
+  BigQuery Data Transfer Service.
 ---
 
 # LeanStartupOps-bigquery-data-transfer-service

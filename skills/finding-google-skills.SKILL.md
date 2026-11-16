@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-00-pct,team-08-finops"
-description: "Decision and setup guidance for selecting Google Cloud tools, adapted strictly to enforce the cheapest GCS-first scale-to-zero path."
+description: >-
+  Decision and setup guidance for selecting Google Cloud tools, adapted strictly to enforce the
+  cheapest GCS-first scale-to-zero path.
 ---
 
 # LeanStartupOps-finding-google-skills

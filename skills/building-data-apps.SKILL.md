@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-15-ux,team-17-analytics"
-description: "Builds lightweight dashboards and data apps deployed on Cloud Run (`min-instances=0`, scale-to-zero) reading curated Parquet/JSONL from GCS."
+description: >-
+  Builds lightweight dashboards and data apps deployed on Cloud Run (`min-instances=0`,
+  scale-to-zero) reading curated Parquet/JSONL from GCS.
 ---
 
 # LeanStartupOps-building-data-apps

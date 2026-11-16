@@ -4,7 +4,10 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-11-security,team-08-finops"
-description: "Assesses the security posture of Google Cloud Storage (GCS) buckets and projects. Grounds every finding in gathered telemetry and evaluates buckets against least-privilege IAM and public access prevention."
+description: >-
+  Assesses the security posture of Google Cloud Storage (GCS) buckets and projects. Grounds every
+  finding in gathered telemetry and evaluates buckets against least-privilege IAM and public
+  access prevention.
 ---
 
 # LeanStartupOps-gcs-security-assessment
@@ -14,7 +17,7 @@ Assesses the security posture of Google Cloud Storage (GCS) buckets and projects
 gathered telemetry and evaluates buckets against least-privilege IAM and public access prevention.
 
 ## 2. Execution & Implementation Rules
-- Inspect bucket ACLs, uniform bucket-level access, and IAM bindings across `your-gcp-project-id`.
+- Inspect bucket ACLs, uniform bucket-level access, and IAM bindings across `our-gcp-project-id`.
 - Verify that `gs://LeanStartupOps-susie-pct-work/final/` and ruleset `27138924` remain strictly READ-ONLY
   for all agents.
 - Flag any `roles/owner`, `roles/editor`, or Service Account key usage immediately.

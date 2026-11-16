@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-00-pct,team-02-code"
-description: "Rules and formatting guidelines for writing Dart /// API documentation and doc comments in strict Dry Technical English."
+description: >-
+  Rules and formatting guidelines for writing Dart /// API documentation and doc comments in
+  strict Dry Technical English.
 ---
 
 # LeanStartupOps-dart-write-documentation

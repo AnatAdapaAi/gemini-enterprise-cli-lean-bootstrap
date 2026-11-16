@@ -13,7 +13,7 @@ description: "Baseline GCS bucket permission verifier for pre-deployment CI chec
 Baseline GCS bucket permission verifier for pre-deployment CI checks.
 
 ## 2. Execution & Implementation Rules
-- Run automated pre-merge check ensuring no `-prod` buckets are referenced in `your-gcp-project-id`.
+- Run automated pre-merge check ensuring no `-prod` buckets are referenced in `our-gcp-project-id`.
 - Log exact mechanical count of inspected buckets to `gs://LeanStartupOps-ci-logs`.
 
 ## MANDATORY OPERATING DOCTRINE: RADICAL CANDOR, ZERO FLATTERY & TOP-1% BAR

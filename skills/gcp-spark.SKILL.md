@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "bootstrap"
 assigned_teams: "team-00-pct,team-17-analytics"
-description: "Executes batch data processing as Cloud Run Jobs (`python:3.12-slim` + DuckDB/Polars/pandas) over Parquet in GCS, replacing Spark on Dataproc."
+description: >-
+  Executes batch data processing as Cloud Run Jobs (`python:3.12-slim` + DuckDB/Polars/pandas)
+  over Parquet in GCS, replacing Spark on Dataproc.
 ---
 
 # LeanStartupOps-gcp-spark

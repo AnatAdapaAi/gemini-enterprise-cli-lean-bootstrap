@@ -10,7 +10,7 @@ description: "Discovers and catalogs Parquet, JSONL, and Markdown assets across 
 # LeanStartupOps-discovering-gcp-data-assets
 
 ## 1. Purpose & Technical Scope
-Discovers and catalogs Parquet, JSONL, and Markdown assets across GCS buckets in `your-gcp-project-id`.
+Discovers and catalogs Parquet, JSONL, and Markdown assets across GCS buckets in `our-gcp-project-id`.
 
 ## 2. Execution & Implementation Rules
 - Scan bucket prefixes and update `index.json` / `ecosystem_index.json` / `product_index.json` mechanically.

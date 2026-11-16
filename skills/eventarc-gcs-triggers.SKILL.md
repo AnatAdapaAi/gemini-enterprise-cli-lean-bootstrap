@@ -15,7 +15,7 @@ Triggers Cloud Run Jobs on GCS object finalization (`incoming_pull_run.md` or ta
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Triggers Cloud Run Jobs on GCS object finalization
   (`incoming_pull_run.md` or task JSON creation).
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

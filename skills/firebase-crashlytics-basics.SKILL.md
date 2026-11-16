@@ -14,7 +14,7 @@ Client crash reporting; adapted to write sanitized crash fingerprints to GCS.
 
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Client crash reporting; adapted to write sanitized crash fingerprints to GCS.
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 

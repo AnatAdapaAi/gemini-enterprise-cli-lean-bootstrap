@@ -4,7 +4,9 @@ version: "2.0.0"
 license: Apache-2.0
 tier: "scale_adapted_zero_idle"
 assigned_teams: "all-applicable-teams"
-description: "Generates vector embeddings written directly to GCS Parquet files (queried via DuckDB `vss` extension, zero Vector Search idle nodes)."
+description: >-
+  Generates vector embeddings written directly to GCS Parquet files (queried via DuckDB `vss`
+  extension, zero Vector Search idle nodes).
 ---
 
 # LeanStartupOps-vertex-ai-embeddings-api
@@ -16,7 +18,7 @@ Vector Search idle nodes).
 ## 2. Execution & Implementation Rules
 - Cheapest Execution Path (Mandatory): Generates vector embeddings written directly to GCS Parquet files
   (queried via DuckDB `vss` extension, zero Vector Search idle nodes).
-- Never provision always-on instances in `your-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
+- Never provision always-on instances in `our-gcp-project-id`. Use GCS Parquet + DuckDB + Cloud Run Jobs
   (`python:3.12-slim`) for all bootstrap and verification workloads.
 - Consult `gs://LeanStartupOps-negative-knowledge/` before enabling any managed cloud API at customer scale.
 
