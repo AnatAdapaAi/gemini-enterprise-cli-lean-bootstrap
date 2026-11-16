@@ -237,4 +237,15 @@ with the community:
  - **Alexander Novikov** ([@novikov-alexander](https://github.com/novikov-alexander)), **Marvin Eisenberger** ([@marvin-eisenberger](https://github.com/marvin-eisenberger)), **Emilien Dupont** ([@EmilienDupont](https://github.com/EmilienDupont)), **Po-Sen Huang**, **Adam Zsolt Wagner** ([@zawagner22](https://github.com/zawagner22)), **Sergey Shirobokov**, **Borislav Kozlovskii**, **Francisco Ruiz** ([@franrruiz](https://github.com/franrruiz)), **Abbas Mehrabian**, **M. Pawan Kumar**, **Abigail See** ([@abisee](https://github.com/abisee)), **Swarat Chaudhuri** ([@swarat](https://github.com/swarat)), **George Holland**, **Alex Davies**, **Sebastian Nowozin** ([@nowozin](https://github.com/nowozin)), **Pushmeet Kohli**, **Matej Balog**.
 
 ---
-*Curated, architected, and field-tested in production by **Anat Lerner** ([@AnatAdapaAi](https://github.com/AnatAdapaAi)).*
+*Curated, architected, and field-tested in production by **Anat Lerner** ([@AnatEnterprise AI](https://github.com/AnatEnterprise AI)).*
+
+## Model Armor Tiered Placement & FinOps Integration
+When connecting our lean CLI bootstrap skills to production Agent Runtimes and MCP servers, we apply a 3-tier
+Model Armor placement discipline:
+- **Tier 1 (External/Workspace Ingestion):** Enable full inline Prompt Injection, Malicious URL, and Document
+  scanning on agents reading emails, calendars, docs, or web inputs.
+- **Tier 2 (Legal/Finance Egress):** Enable inline Sensitive Data Protection (PII redaction) on compliance and
+  financial agents.
+- **Tier 3 (Internal Code/Security):** Bypass aggressive inline content filters on trusted code-generation and
+  security-testing agents to avoid false positives on technical payloads and conserve our 2M/month free token
+  allowance.
