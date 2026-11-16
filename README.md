@@ -1,57 +1,87 @@
 # Gemini Enterprise CLI - FinOps-First Bootstrap & Scale Edition
 
 A field-tested community contribution proposed for the official **Google Gemini Enterprise CLI** repository. 
-This branch equips Gemini CLI with **99 FinOps-governed Google Cloud skills** and documents empirical billing discoveries from 4 months of production testing (August–November).
+This branch equips Gemini CLI with **99 FinOps-governed Google Cloud skills** and documents empirical
+billing discoveries from 4 months of production testing (August - November).
 
 ---
 
 ## 1. The 4-Month Billing Benchmark: From $2,158/mo Idle Burn to $296/mo (and $179 Net Credit Draw) at 19h/Day Production
 
-When connecting standard enterprise cloud templates out of the box, always-on services silently drain startup credits even when no code is running. 
-By re-architecting around **Cloud Run + Cloud Storage + Cloud Build**, **Off-Peak Regional Batching**, and **3-Stage Gemini Model Routing**, we achieved an **86% drop in gross usage cost** and a **91% drop in net promotional credit consumption**:
+When connecting standard enterprise cloud templates out of the box, always-on services silently drain
+startup credits even when no code is running.
+By re-architecting around **Cloud Run + Cloud Storage + Cloud Build**, **Off-Peak Regional Batching**, and
+**3-Stage Gemini Model Routing**, we achieved an **86% drop in gross usage cost** and a **91% drop in net
+promotional credit consumption**:
 
 | Billing Period | Workload Activity | Gross Usage Cost | Automatic Discounts (`Spending` + `Subscription`) | Net Promotional Credits Consumed | Key Architectural & FinOps Shift |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **August** | Initial repo connection (Default Templates) | **$1,922.33** | `-4.96%` (-$95.35) | **-$1,826.98** | 
-Always-on defaults: Compute Engine ($593.40), AlloyDB ($477.36), Cloud Composer ($432.58), Cloud Workstations ($208.89), GKE ($76.80), Spanner ($54.31). |
+Always-on defaults: Compute Engine ($593.40), AlloyDB ($477.36), Cloud Composer ($432.58), Cloud
+Workstations ($208.89), GKE ($76.80), Spanner ($54.31). |
 | **September** | Zero computer touch (Weeks of idle burn) | **$2,158.83** | `-4.99%` (-$107.73) | **-$2,051.10** | 
-Idle drain: Compute Engine jumped to $1,344.45 (+127%), Composer ($411.89), Workstations ($145.94), Spanner ($88.11), Networking ($43.23). |
+Idle drain: Compute Engine jumped to $1,344.45 (+127%), Composer ($411.89), Workstations ($145.94), Spanner
+($88.11), Networking ($43.23). |
 | **October** | Mid-month migration to Serverless & Off-Peak | **$1,076.46** | **`-21.69%`** (-$233.50) | **-$842.95** | 
-Decommissioned AlloyDB (-100% to $0.01), cut Compute (-79%), Composer (-68%), Spanner (-68%), GKE (-67%); moved state to **Cloud Storage ($0.42)** & **Cloud Run ($0.11)**. |
-| **November (1–15)** | **19+ hours/day intensive multi-agent production** | **$296.75** | **`-39.67%`** (-$117.71) | **-$179.05** | **6 production Cloud Run services costing $0.18 total** + GCS ($0.42) + Off-Peak Night Batching + 3-Stage Gemini Routing. **Nearly 40% discounted before touching credits!** |
+Decommissioned AlloyDB (-100% to $0.01), cut Compute (-79%), Composer (-68%), Spanner (-68%), GKE (-67%);
+moved state to **Cloud Storage ($0.42)** & **Cloud Run ($0.11)**. |
+| **November (1-15)** | **19+ hours/day intensive multi-agent production** | **$296.75** | **`-39.67%`** (-$117.71) | **-$179.05** | **6 production Cloud Run services costing $0.18 total** + GCS ($0.42) + Off-Peak Night Batching + 3-Stage Gemini Routing. **Nearly 40% discounted before touching credits!** |
 
 ---
 
 ## 2. Six Field-Tested FinOps Discoveries Every Startup Should Know
 
-### Discovery #1: Cheap Storage (GCS) + Regional Night-Window Batching Unlocks Up to ~40–50% Automatic Billing Reductions (Before Touching Credits!)
-- **What we saw in the data:** In August and September, running standard always-on compute yielded only a `-4.96%` spending discount, forcing **95% of the bill** to eat directly into startup promotional credits.
-- **The Breakthrough:** In mid October-November, by storing all intermediate state/snapshots in cheap **Cloud Storage (`$0.42/mo`)** and dispatching heavy agent workloads during the **local night window of the target GCP region (`us-central1` Iowa night = Israel daytime)** using **Batch Jobs & Context Caching**, effective automatic billing reductions jumped to **`-39.67%`** (`-32.17%` spending-based discounts + `-7.5%` subscription credits) - cutting net credit draw to just **$179.05** during 19-hour/day heavy work!
+### Discovery #1: Cheap Storage (GCS) + Regional Night-Window Batching Unlocks Up to ~40-50% Automatic Billing Reductions (Before Touching Credits!)
+- **What we saw in the data:** In August and September, running standard always-on compute yielded only a
+  `-4.96%` spending discount, forcing **95% of the bill** to eat directly into startup promotional credits.
+- **The Breakthrough:** In mid October-November, by storing all intermediate state/snapshots in cheap
+  **Cloud Storage (`$0.42/mo`)** and dispatching heavy agent workloads during the **local night window of
+  the target GCP region (`us-central1` Iowa night = Israel daytime)** using **Batch Jobs & Context
+  Caching**, effective automatic billing reductions jumped to **`-39.67%`** (`-32.17%` spending-based
+  discounts + `-7.5%` subscription credits) - cutting net credit draw to just **$179.05** during 19-hour/day
+  heavy work!
 - **Why Regional Night Scheduling Works Twice:**
-  1. It qualifies batch/cached workloads for massive automatic tier discounts that do not deduct from our startup credits.
-  2. Running during `us-central1` off-peak night hours eliminates `429 Resource Exhausted` quota collisions and mid-generation retry storms (which otherwise bill you twice for failed partial context windows).
+ 1. It qualifies batch/cached workloads for massive automatic tier discounts that do not deduct from our
+    startup credits.
+ 2. Running during `us-central1` off-peak night hours eliminates `429 Resource Exhausted` quota collisions
+    and mid-generation retry storms (which otherwise bill we twice for failed partial context windows).
 
 ### Discovery #2: 3-Stage Task-Tiered Gemini Routing (Zero-Thinking Pull -> Heavy Execution -> Independent Audit)
 Never use a heavyweight reasoning model with `HIGH` thinking just to read files or fetch context:
-1. **Stage 1 - Ingestion & Context Pull (Zero Thinking):** Use `Gemini 3.8 Flash` / `Omni Flash` **with thinking disabled (`thinking_budget=0`)** to pull files from GCS, map schemas, and filter relevant snippets at minimal cost and sub-second latency.
-2. **Stage 2 - Core Synthesis & Execution:** Pass **only** the distilled context into heavy models (`4 Carbon High` / `Pro`) for complex code and architectural generation.
-3. **Stage 3 - Deterministic Audit Gate:** Run an independent verification pass (`4 Argon High` + `vertex-ai-evaluation-service`) to validate outputs before writing to canonical storage.
+1. **Stage 1 - Ingestion & Context Pull (Zero Thinking):** Use `Gemini 3.8 Flash` / `Omni Flash` **with
+   thinking disabled (`thinking_budget=0`)** to pull files from GCS, map schemas, and filter relevant
+   snippets at minimal cost and sub-second latency.
+2. **Stage 2 - Core Synthesis & Execution:** Pass **only** the distilled context into heavy models (`4
+   Carbon High` / `Pro`) for complex code and architectural generation.
+3. **Stage 3 - Deterministic Audit Gate:** Run an independent verification pass (`4 Argon High` +
+   `vertex-ai-evaluation-service`) to validate outputs before writing to canonical storage.
 
 ### Discovery #3: Zero-Token SHA-256 Delta Gate & Grounding Gatekeeper
-- **The Hidden Drain:** Enabling live Google Search Grounding or re-running agents on unchanged upstream data silently multiplies API bills.
-- **The Fix:** Compute a deterministic `SHA-256` hash of the input state against the latest GCS snapshot (`snapshots/<agent>_latest.json`). If there is no significant delta, return the verified GCS snapshot for **$0.00 and 0 tokens**. Only invoke live search grounding when explicit telemetry/grounding triggers are present.
+- **The Hidden Drain:** Enabling live Google Search Grounding or re-running agents on unchanged upstream
+  data silently multiplies API bills.
+- **The Fix:** Compute a deterministic `SHA-256` hash of the input state against the latest GCS snapshot
+  (`snapshots/<agent>_latest.json`). If there is no significant delta, return the verified GCS snapshot for
+  **$0.00 and 0 tokens**. Only invoke live search grounding when explicit telemetry/grounding triggers are
+  present.
 
 ### Discovery #4: Replace Always-On Vector DBs ($500+/mo) with Vertex AI RAG Engine (`Serverless Mode`) + GCS
-- **The Trap:** Running `AlloyDB` ($477.36/mo in August) + `Cloud Spanner` ($88.11/mo in September) + dedicated `Vertex AI Search` ($30.00/mo idle minimum) costs ~$600/month before a single query runs.
-- **The Fix:** Use **Vertex AI RAG Engine in `Serverless mode`** backed by **Cloud Storage buckets ($0.42/mo)** and local/serverless Parquet/DuckDB indexes for early-stage development. AlloyDB cost dropped **-100% (to $0.01)**.
+- **The Trap:** Running `AlloyDB` ($477.36/mo in August) + `Cloud Spanner` ($88.11/mo in September) +
+  dedicated `Vertex AI Search` ($30.00/mo idle minimum) costs ~$600/month before a single query runs.
+- **The Fix:** Use **Vertex AI RAG Engine in `Serverless mode`** backed by **Cloud Storage buckets
+  ($0.42/mo)** and local/serverless Parquet/DuckDB indexes for early-stage development. AlloyDB cost dropped
+  **-100% (to $0.01)**.
 
 ### Discovery #5: Eliminate "Silent Container Taxes" (`Vulnerability Scanning` & `Cloud Workstations`)
-- **Cloud Workstations** burned **$208.89/mo in August** and **$145.94/mo in September** while completely untouched due to persistent control-plane and disk billing. Switching to **Cloud Shell + stateless Cloud Build** saved >$200/mo immediately.
-- **Container Registry Vulnerability Scanning** automatically charged **$19.50 in October** just scanning intermediate build images. Using **Cloud Run Source Deploys** (`$0.18/mo` across 6 active microservices) and slim packaging reduced `Artifact Registry` billing to **$0.07/mo**.
+- **Cloud Workstations** burned **$208.89/mo in August** and **$145.94/mo in September** while completely
+  untouched due to persistent control-plane and disk billing. Switching to **Cloud Shell + stateless Cloud
+  Build** saved >$200/mo immediately.
+- **Container Registry Vulnerability Scanning** automatically charged **$19.50 in October** just scanning
+  intermediate build images. Using **Cloud Run Source Deploys** (`$0.18/mo` across 6 active microservices)
+  and slim packaging reduced `Artifact Registry` billing to **$0.07/mo**.
 
 ### Discovery #6: Stage-Aware GCP Product Selection (How to Use Enterprise GCP Tools FinOps-Correctly)
 Every Google Cloud product has the right stage and configuration. 
-Do not abandon enterprise tools—configure them with strict FinOps guardrails when your scale justifies them:
+Do not abandon enterprise tools - configure them with strict FinOps guardrails when our scale justifies them:
 
 | Workload Domain | Stage 1: Day-1 Lean Bootstrap (Zero Idle Cost) | Stage 2: Enterprise Scale (FinOps-Governed Capacity) |
 | :--- | :--- | :--- |
@@ -139,7 +169,7 @@ Do not abandon enterprise tools—configure them with strict FinOps guardrails w
 - [`skills/vpc-service-controls.SKILL.md`](skills/vpc-service-controls.SKILL.md)
 - [`skills/workload-identity-federation.SKILL.md`](skills/workload-identity-federation.SKILL.md)
 
-### Stage 2: High-Scale Enterprise GCP Products — FinOps-Governed (26 Skills)
+### Stage 2: High-Scale Enterprise GCP Products - FinOps-Governed (26 Skills)
 - [`skills/alloydb-ai-vector-query.SKILL.md`](skills/alloydb-ai-vector-query.SKILL.md)
 - [`skills/alloydb-postgres-admin.SKILL.md`](skills/alloydb-postgres-admin.SKILL.md)
 - [`skills/bigquery-continuous-queries.SKILL.md`](skills/bigquery-continuous-queries.SKILL.md)
@@ -173,27 +203,36 @@ Do not abandon enterprise tools—configure them with strict FinOps guardrails w
 
 ## Acknowledgments & Community Inspiration
 
-Many of the architectural patterns, agent guardrails, and operational skills in this repository were inspired by—and distilled from—recommendations, engineering deep-dives, and transcripts from podcasts, meetups, and talks I love listening to and learning from. 
-Huge credit and gratitude to the builders, founders, and researchers who generously share their playbooks with the community:
+Many of the architectural patterns, agent guardrails, and operational skills in this repository were
+inspired by - and distilled from - recommendations, engineering deep-dives, and transcripts from podcasts,
+meetups, and talks I love listening to and learning from.
+Huge credit and gratitude to the builders, founders, and researchers who generously share their playbooks
+with the community:
 
 - **AI-Native Startup & Builder Podcasts:**
-  - **Y Combinator** ([@ycombinator](https://github.com/ycombinator)) (*The Light Cone*): **Garry Tan** ([@garrytan](https://github.com/garrytan)), **Diana Hu** ([@sdianahu](https://github.com/sdianahu)), and **Jared Friedman** ([@jaredfriedman](https://github.com/jaredfriedman)) (*"How to Make Claude Code Your AI Engineering Team"*, *"How To Build A Company With AI From The Ground Up"*, *"Inside YC's AI Playbook"*, *"The AI Agent Economy Is Here"*).
-  - **Dan Shipper** ([@danshipper](https://github.com/danshipper)) / **Every** ([@every-inc](https://github.com/every-inc)) (*"The AI Paradox: More Automation, More Humans, More Work"*).
-  - **Jack Dorsey** ([@jack](https://github.com/jack)) & the builders behind *"How to Build a Self-Improving Company with AI"*.
-  - **Howie Liu** ([@howieliu](https://github.com/howieliu)) (*CEO*, **Airtable** ([@Airtable](https://github.com/Airtable)) — *"What the Top 1% Do With AI"*).
-  - **Daniel Priestley** ([@danielpriestley](https://github.com/danielpriestley)) (*The 7-11-4 Trust & Distribution Framework*).
-  - **The Tokenmaxxing & Agentic Coding Creator Community:** Creators and speakers behind *"Tokenmaxxing: How Top Builders Use AI To Do The Work Of 400 Engineers"*, *"How to Build an Internal AI Agent That Evolves Itself"*, *"I Tried 100 Claude Code Skills — These 6 Are The Best"*, *"You're Not Behind (Yet): Learn AI Agents in 13 Minutes"*, and *"The New Way To Build A Startup"*.
+ - **Y Combinator** ([@ycombinator](https://github.com/ycombinator)) (*The Light Cone*): **Garry Tan** ([@garrytan](https://github.com/garrytan)), **Diana Hu** ([@sdianahu](https://github.com/sdianahu)), and **Jared Friedman** ([@jaredfriedman](https://github.com/jaredfriedman)) (*"How to Make Claude Code Our AI Engineering Team"*, *"How To Build A Company With AI From The Ground Up"*, *"Inside YC's AI Playbook"*, *"The AI Agent Economy Is Here"*).
+ - **Dan Shipper** ([@danshipper](https://github.com/danshipper)) / **Every** ([@every-inc](https://github.com/every-inc)) (*"The AI Paradox: More Automation, More Humans, More Work"*).
+ - **Jack Dorsey** ([@jack](https://github.com/jack)) & the builders behind *"How to Build a Self-Improving Company with AI"*.
+ - **Howie Liu** ([@howieliu](https://github.com/howieliu)) (*CEO*, **Airtable** ([@Airtable](https://github.com/Airtable)) - *"What the Top 1% Do With AI"*).
+ - **Daniel Priestley** ([@danielpriestley](https://github.com/danielpriestley)) (*The 7-11-4 Trust & Distribution Framework*).
+ - **The Tokenmaxxing & Agentic Coding Creator Community:** Creators and speakers behind *"Tokenmaxxing: How
+   Top Builders Use AI To Do The Work Of 400 Engineers"*, *"How to Build an Internal AI Agent That Evolves
+   Itself"*, *"I Tried 100 Claude Code Skills - These 6 Are The Best"*, *"We're Not Behind (Yet): Learn AI
+   Agents in 13 Minutes"*, and *"The New Way To Build A Startup"*.
 - **Israeli Engineering, Cloud & Venture Community:**
-  - **monday.com AI Engineering Team** ([@mondaycom](https://github.com/mondaycom)): **Netanel**, **Tomer Brook** ([@TomerBrook](https://github.com/TomerBrook)), and **Guy Hadas** ([@GuyHadas](https://github.com/GuyHadas)) (for sharing their candid real-world lessons on building *Atlas*, PR-Guardrails, cross-session agent memory, and per-builder token budgeting).
-  - **Yonit Gruber** **Hazani** (*Cloud Architect, Google Cloud Tel Aviv* — *Agentic Coding*).
-  - **Alon Schindel** (*VP of AI & Threat Research*, **Wiz** ([@wiz-sec](https://github.com/wiz-sec)) / *Google* — *The 2026 AI Threat Landscape*).
-  - **Tom Even** (*Founder, Automate-AI / Agents & Me*) and **Guy Katsovich** & **Amit** at **Fusion VC** (for organizing community builder sessions with Google Israel).
-  - **Roi** (*Solution Architect*, **MongoDB** ([@mongodb](https://github.com/mongodb))) & the speakers at **LangTalks 2026 (*Agents in Production*)**.
+ - **monday.com AI Engineering Team** ([@mondaycom](https://github.com/mondaycom)): **Netanel**, **Tomer Brook** ([@TomerBrook](https://github.com/TomerBrook)), and **Guy Hadas** ([@GuyHadas](https://github.com/GuyHadas)) (for sharing their candid real-world lessons on building *Atlas*, PR-Guardrails, cross-session agent memory, and per-builder token budgeting).
+ - **Yonit Gruber** **Hazani** (*Cloud Architect, Google Cloud Tel Aviv* - *Agentic Coding*).
+ - **Alon Schindel** (*VP of AI & Threat Research*, **Wiz** ([@wiz-sec](https://github.com/wiz-sec)) / *Google* - *The 2026 AI Threat Landscape*).
+ - **Tom Even** (*Founder, Automate-AI / Agents & Me*) and **Guy Katsovich** & **Amit** at **Fusion VC**
+   (for organizing community builder sessions with Google Israel).
+ - **Roi** (*Solution Architect*, **MongoDB** ([@mongodb](https://github.com/mongodb))) & the speakers at **LangTalks 2026 (*Agents in Production*)**.
 - **Google Cloud** ([@GoogleCloudPlatform](https://github.com/GoogleCloudPlatform)), **Google Workspace & Ecosystem Partners:**
-  - **Sundar Pichai** (*Gemini at Work*), **Thomas Kurian**, **Mark Lohmeyer** (*AI & Computing Infrastructure*), **Yuli Kwon Kim** (*Google Workspace*), **Francis deSouza**, and **Ricky Robinette** (*Developer Marketing*).
-  - **Agent Platform, Observability, Data & Security Teams:** **Rami Shalom** ([@rsh210m](https://github.com/rsh210m)) (*Google Cloud Observability*) & **Jason Lopatecki** ([@jlopatecki](https://github.com/jlopatecki)) (*CEO*, **Arize AI** ([@Arize-ai](https://github.com/Arize-ai))), **Aman Khan** ([@amanaiproduct](https://github.com/amanaiproduct)) & **Lavi** (*Agent Platform & Governance*), **Ryan Ismert** ([@ryanismert](https://github.com/ryanismert)) & **Elia** (with **Praveen** at Comcast & **Tejuel** at **Palo Alto Networks** ([@PaloAltoNetworks](https://github.com/PaloAltoNetworks))), **Deepak Kalakuri** & **Mark Church** ([@mark-church](https://github.com/mark-church)) (with **Scott** at **Replit** ([@replit](https://github.com/replit))), **Ali Bek** & **Maria** (**Booking.com** ([@bookingcom](https://github.com/bookingcom))), **Chetna Sehgal** (*Accenture*), **Casey McNamara** (*Capgemini*), **Ravi Shah** & **Sean Liu** (*Agent Identity*), **Chaitanya ("Chai") & Liu Yang** (*Dataplex / Knowledge Catalog*), **Sujata Mandava** & **Ravi Murthy** (*AlloyDB*), **Neeraja Rantisinthala** & **Fernando Croceri** ([@fecroceri](https://github.com/fecroceri)) (*BigQuery* & **MercadoLibre** ([@mercadolibre](https://github.com/mercadolibre))), **Sajil Aggarwal** (*GCE/GKE*), **Jurgen Kutscher** & **Nick Bennett** ([@nick-bennett](https://github.com/nick-bennett)) (**Mandiant** ([@mandiant](https://github.com/mandiant)) *Consulting / Google Cloud*), **Himanshu Mehra** ([@himanshuxmehra](https://github.com/himanshuxmehra)), **Fatima**, **Sita**, and **Luke Cambry** & **Ashish Gupta** (*Google Workspace*).
+ - **Sundar Pichai** (*Gemini at Work*), **Thomas Kurian**, **Mark Lohmeyer** (*AI & Computing
+   Infrastructure*), **Yuli Kwon Kim** (*Google Workspace*), **Francis deSouza**, and **Ricky Robinette**
+   (*Developer Marketing*).
+ - **Agent Platform, Observability, Data & Security Teams:** **Rami Shalom** ([@rsh210m](https://github.com/rsh210m)) (*Google Cloud Observability*) & **Jason Lopatecki** ([@jlopatecki](https://github.com/jlopatecki)) (*CEO*, **Arize AI** ([@Arize-ai](https://github.com/Arize-ai))), **Aman Khan** ([@amanaiproduct](https://github.com/amanaiproduct)) & **Lavi** (*Agent Platform & Governance*), **Ryan Ismert** ([@ryanismert](https://github.com/ryanismert)) & **Elia** (with **Praveen** at Comcast & **Tejuel** at **Palo Alto Networks** ([@PaloAltoNetworks](https://github.com/PaloAltoNetworks))), **Deepak Kalakuri** & **Mark Church** ([@mark-church](https://github.com/mark-church)) (with **Scott** at **Replit** ([@replit](https://github.com/replit))), **Ali Bek** & **Maria** (**Booking.com** ([@bookingcom](https://github.com/bookingcom))), **Chetna Sehgal** (*Accenture*), **Casey McNamara** (*Capgemini*), **Ravi Shah** & **Sean Liu** (*Agent Identity*), **Chaitanya ("Chai") & Liu Yang** (*Dataplex / Knowledge Catalog*), **Sujata Mandava** & **Ravi Murthy** (*AlloyDB*), **Neeraja Rantisinthala** & **Fernando Croceri** ([@fecroceri](https://github.com/fecroceri)) (*BigQuery* & **MercadoLibre** ([@mercadolibre](https://github.com/mercadolibre))), **Sajil Aggarwal** (*GCE/GKE*), **Jurgen Kutscher** & **Nick Bennett** ([@nick-bennett](https://github.com/nick-bennett)) (**Mandiant** ([@mandiant](https://github.com/mandiant)) *Consulting / Google Cloud*), **Himanshu Mehra** ([@himanshuxmehra](https://github.com/himanshuxmehra)), **Fatima**, **Sita**, and **Luke Cambry** & **Ashish Gupta** (*Google Workspace*).
 - **Google DeepMind** ([@google-deepmind](https://github.com/google-deepmind)) ***AlphaEvolve* Research Team:**
-  - **Alexander Novikov** ([@novikov-alexander](https://github.com/novikov-alexander)), **Marvin Eisenberger** ([@marvin-eisenberger](https://github.com/marvin-eisenberger)), **Emilien Dupont** ([@EmilienDupont](https://github.com/EmilienDupont)), **Po-Sen Huang**, **Adam Zsolt Wagner** ([@zawagner22](https://github.com/zawagner22)), **Sergey Shirobokov**, **Borislav Kozlovskii**, **Francisco Ruiz** ([@franrruiz](https://github.com/franrruiz)), **Abbas Mehrabian**, **M. Pawan Kumar**, **Abigail See** ([@abisee](https://github.com/abisee)), **Swarat Chaudhuri** ([@swarat](https://github.com/swarat)), **George Holland**, **Alex Davies**, **Sebastian Nowozin** ([@nowozin](https://github.com/nowozin)), **Pushmeet Kohli**, **Matej Balog**.
+ - **Alexander Novikov** ([@novikov-alexander](https://github.com/novikov-alexander)), **Marvin Eisenberger** ([@marvin-eisenberger](https://github.com/marvin-eisenberger)), **Emilien Dupont** ([@EmilienDupont](https://github.com/EmilienDupont)), **Po-Sen Huang**, **Adam Zsolt Wagner** ([@zawagner22](https://github.com/zawagner22)), **Sergey Shirobokov**, **Borislav Kozlovskii**, **Francisco Ruiz** ([@franrruiz](https://github.com/franrruiz)), **Abbas Mehrabian**, **M. Pawan Kumar**, **Abigail See** ([@abisee](https://github.com/abisee)), **Swarat Chaudhuri** ([@swarat](https://github.com/swarat)), **George Holland**, **Alex Davies**, **Sebastian Nowozin** ([@nowozin](https://github.com/nowozin)), **Pushmeet Kohli**, **Matej Balog**.
 
 ---
 *Curated, architected, and field-tested in production by **Anat Lerner** ([@AnatAdapaAi](https://github.com/AnatAdapaAi)).*
