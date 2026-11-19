@@ -46,7 +46,7 @@ Reductions (Before Touching Credits!)
  1. It qualifies batch/cached workloads for massive automatic tier discounts that do not deduct from our
     startup credits.
  2. Running during `us-central1` off-peak night hours eliminates `429 Resource Exhausted` quota collisions
-    and mid-generation retry storms (which otherwise bill we twice for failed partial context windows).
+    and mid-generation retry storms (which otherwise bill us twice for failed partial context windows).
 
 ### Discovery #2: 3-Stage Task-Tiered Gemini Routing (Zero-Thinking Pull -> Heavy Execution -> Independent Audit)
 Never use a heavyweight reasoning model with `HIGH` thinking just to read files or fetch context:
@@ -55,7 +55,7 @@ Never use a heavyweight reasoning model with `HIGH` thinking just to read files 
    snippets at minimal cost and sub-second latency.
 2. **Stage 2 - Core Synthesis & Execution:** Pass **only** the distilled context into heavy models (`4
    Carbon High` / `Pro`) for complex code and architectural generation.
-3. **Stage 3 - Deterministic Audit Gate:** Run an independent verification pass (`4 Argon High` +
+3. **Stage 3 - Deterministic Audit Gate:** Run an independent verification pass (`Independent Auditor Model` +
    `vertex-ai-evaluation-service`) to validate outputs before writing to canonical storage.
 
 ### Discovery #3: Zero-Token SHA-256 Delta Gate & Grounding Gatekeeper
@@ -237,7 +237,7 @@ with the community:
  - **Alexander Novikov** ([@novikov-alexander](https://github.com/novikov-alexander)), **Marvin Eisenberger** ([@marvin-eisenberger](https://github.com/marvin-eisenberger)), **Emilien Dupont** ([@EmilienDupont](https://github.com/EmilienDupont)), **Po-Sen Huang**, **Adam Zsolt Wagner** ([@zawagner22](https://github.com/zawagner22)), **Sergey Shirobokov**, **Borislav Kozlovskii**, **Francisco Ruiz** ([@franrruiz](https://github.com/franrruiz)), **Abbas Mehrabian**, **M. Pawan Kumar**, **Abigail See** ([@abisee](https://github.com/abisee)), **Swarat Chaudhuri** ([@swarat](https://github.com/swarat)), **George Holland**, **Alex Davies**, **Sebastian Nowozin** ([@nowozin](https://github.com/nowozin)), **Pushmeet Kohli**, **Matej Balog**.
 
 ---
-*Curated, architected, and field-tested in production by **Anat Lerner** ([@AnatEnterprise AI](https://github.com/AnatEnterprise AI)).*
+*Curated, architected, and field-tested in production by **Anat Lerner** ([@AnatAdapaAi](https://github.com/AnatAdapaAi)).*
 
 ## Model Armor Tiered Placement & FinOps Integration
 When connecting our lean CLI bootstrap skills to production Agent Runtimes and MCP servers, we apply a 3-tier
